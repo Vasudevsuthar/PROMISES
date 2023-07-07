@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PROMISES</title>
+</head>
+
+<body>
+    <script>
+        const currentDate = new Date();
+        const updateLastUserActivityTime = () => {
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    resolve(currentDate);
+                }, 1000);
+            });
+        };
+
+        const createPost = () => {
+            const post = {
+                id: 1,
+                title: "My first post",
+                content: "This is my first post!",
+            };
+
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    resolve(post);
+                }, 1000);
+            });
+        };
+
+        const deletePost = (postId) => {
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    resolve();
+                }, 1000);
+            });
+        };
+
+        const main = async () => {
+            const post = await createPost();
+            const lastActivityTime = await updateLastUserActivityTime();
+
+            console.log("Post created:", post);
+            console.log("Last activity time:", lastActivityTime);
+
+            await deletePost(post.id);
+
+            const posts = await createPost();
+            console.log("New posts:", posts);
+        };
+
+        main();
+
+    </script>
+</body>
+
+</html>
